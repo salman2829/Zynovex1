@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0a1033;
+  --ink-soft: #121a45;
+  --mist: #eef2fb;
+  --paper: #f8f9fd;
+  --steel: #5a6480;
+  --line: rgba(10, 16, 51, 0.1);
+  --accent: #1a56e8;
+  --accent-deep: #0d3fc4;
+  --signal: #4d8aff;
+  --glow: rgba(26, 86, 232, 0.35);
+  --background: var(--paper);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-mist: var(--mist);
+  --color-paper: var(--paper);
+  --color-steel: var(--steel);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-signal: var(--signal);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 30%, white);
+  color: var(--ink);
+}
+
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+.atmosphere {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(26, 86, 232, 0.28), transparent 55%),
+    radial-gradient(900px 500px at 10% 20%, rgba(77, 138, 255, 0.14), transparent 50%),
+    linear-gradient(165deg, #060a1f 0%, #0a1033 48%, #121a45 100%);
+}
+
+.section-grid {
+  background-image:
+    linear-gradient(rgba(10, 16, 51, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 16, 51, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
