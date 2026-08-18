@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import SignOutButton from "@/components/auth/SignOutButton";
 import InquiryStatusButtons from "@/components/admin/InquiryStatusButtons";
@@ -62,7 +63,15 @@ export default async function AdminPage() {
               {newCount} new · {leads.length} total · signed in as {user.email}
             </p>
           </div>
-          <SignOutButton redirectTo="/admin/login" />
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/admin/referrals"
+              className="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white/70 transition hover:border-signal hover:text-white"
+            >
+              Referrals
+            </Link>
+            <SignOutButton redirectTo="/admin/login" />
+          </div>
         </div>
 
         <div className="mt-10 space-y-4">

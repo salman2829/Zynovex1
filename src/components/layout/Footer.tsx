@@ -61,6 +61,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-2.5">
             {[
               { href: "/about", label: "About" },
+              { href: "/referral", label: "Referral program" },
               { href: "/contact", label: "Contact / Quote" },
               { href: "/auth/login", label: "Client login" },
               { href: "/admin/login", label: "Admin portal" },

@@ -11,6 +11,7 @@ import { hasSupabaseEnv } from "@/lib/supabase/config";
 const links = [
   { href: "/#services", label: "Services" },
   { href: "/#process", label: "Process" },
+  { href: "/referral", label: "Referral" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

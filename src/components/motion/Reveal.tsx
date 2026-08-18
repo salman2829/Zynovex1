@@ -5,6 +5,7 @@ import {
   useInView,
   useReducedMotion,
   type Variants,
+  type UseInViewOptions,
 } from "framer-motion";
 import { useRef, type ReactNode } from "react";
 
@@ -42,8 +43,8 @@ const variants: Record<string, Variants> = {
 };
 
 /** Cards must enter this viewport band to count as visible — leaving resets them. */
-const replayViewport = {
-  once: false as const,
+const replayViewport: UseInViewOptions = {
+  once: false,
   amount: 0.45,
   margin: "-12% 0px -18% 0px",
 };
