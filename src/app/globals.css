@@ -352,11 +352,3 @@ body {
     transition: none !important;
   }
 }
-
-/* Skip offscreen paint work where supported */
-.section-dark,
-.section-panel,
-.section-light {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 800px;
-}

@@ -12,7 +12,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const variants: Record<string, Variants> = {
   up: {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 32 },
     visible: { opacity: 1, y: 0 },
   },
   fade: {
@@ -20,23 +20,24 @@ const variants: Record<string, Variants> = {
     visible: { opacity: 1 },
   },
   left: {
-    hidden: { opacity: 0, x: -16 },
+    hidden: { opacity: 0, x: -24 },
     visible: { opacity: 1, x: 0 },
   },
   right: {
-    hidden: { opacity: 0, x: 16 },
+    hidden: { opacity: 0, x: 24 },
     visible: { opacity: 1, x: 0 },
   },
   scale: {
-    hidden: { opacity: 0, y: 16, scale: 0.98 },
+    hidden: { opacity: 0, y: 24, scale: 0.96 },
     visible: { opacity: 1, y: 0, scale: 1 },
   },
   card: {
-    hidden: { opacity: 0, y: 28 },
+    hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0 },
   },
+  /** Clear jump-in when card enters the viewport */
   jump: {
-    hidden: { opacity: 0, y: 48, scale: 0.96 },
+    hidden: { opacity: 0, y: 88, scale: 0.9 },
     visible: { opacity: 1, y: 0, scale: 1 },
   },
 };
@@ -58,7 +59,11 @@ export default function Reveal({
 }: RevealProps) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, { amount: 0.2, once: true });
+  const inView = useInView(ref, {
+    amount: 0.2,
+    once: false,
+    margin: "0px 0px -12% 0px",
+  });
   const Comp = motion[as];
 
   if (reduce) {
@@ -73,7 +78,7 @@ export default function Reveal({
       variants={variants[variant]}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
-      transition={{ duration: 0.4, delay, ease }}
+      transition={{ duration: 0.45, delay, ease }}
     >
       {children}
     </Comp>
@@ -92,6 +97,9 @@ export function Stagger({
   return <div className={className}>{children}</div>;
 }
 
+/**
+ * Card jumps in whenever it scrolls into view (replays on every visit).
+ */
 export function StaggerItem({
   children,
   className,
@@ -105,7 +113,11 @@ export function StaggerItem({
 }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { amount: 0.18, once: true });
+  const inView = useInView(ref, {
+    amount: 0.2,
+    once: false,
+    margin: "0px 0px -10% 0px",
+  });
 
   if (reduce) {
     return <div className={className}>{children}</div>;
@@ -124,14 +136,14 @@ export function StaggerItem({
         isJump
           ? {
               type: "spring",
-              stiffness: 420,
-              damping: 26,
-              mass: 0.7,
-              delay: Math.min(index * 0.06, 0.12),
+              stiffness: 320,
+              damping: 16,
+              mass: 0.9,
+              delay: inView ? Math.min(index * 0.1, 0.2) : 0,
             }
           : {
-              duration: 0.4,
-              delay: Math.min(index * 0.06, 0.12),
+              duration: 0.45,
+              delay: inView ? Math.min(index * 0.08, 0.16) : 0,
               ease,
             }
       }
