@@ -3,10 +3,21 @@ import { updateSession } from "@/lib/supabase/middleware";
 import { hasSupabaseEnv } from "@/lib/supabase/config";
 
 export async function middleware(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+  const isAdminLogin = path === "/admin/login";
+  const isAdminArea = path.startsWith("/admin") && !isAdminLogin;
+  const isClientDashboard = path.startsWith("/dashboard");
+
   if (!hasSupabaseEnv()) {
-    if (request.nextUrl.pathname.startsWith("/dashboard")) {
+    if (isAdminArea) {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = "/admin/login";
+      return NextResponse.redirect(redirectUrl);
+    }
+    if (isClientDashboard) {
       const redirectUrl = request.nextUrl.clone();
       redirectUrl.pathname = "/auth/login";
+      redirectUrl.searchParams.set("next", path);
       return NextResponse.redirect(redirectUrl);
     }
     return NextResponse.next();
@@ -15,8 +26,16 @@ export async function middleware(request: NextRequest) {
   return updateSession(request);
 }
 
+/**
+ * Only protect dashboards + admin + OAuth callback.
+ * Public auth pages and APIs skip middleware so clicks stay fast.
+ */
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/dashboard/:path*",
+    "/admin",
+    "/admin/((?!login$).*)",
+    "/admin/login",
+    "/auth/callback",
   ],
 };

@@ -14,19 +14,19 @@ export default function CaseStudy() {
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
           >
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent-deep">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal">
               How we work
             </p>
-            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl text-balance">
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white md:text-4xl text-balance">
               A process built for clarity and speed
             </h2>
             <div className="mt-8 grid grid-cols-2 gap-6">
               <div>
-                <p className="font-display text-4xl font-bold text-ink">01</p>
+                <p className="font-display text-4xl font-bold text-white">01</p>
                 <p className="mt-1 text-sm text-steel">Discover & define scope</p>
               </div>
               <div>
-                <p className="font-display text-4xl font-bold text-ink">02</p>
+                <p className="font-display text-4xl font-bold text-white">02</p>
                 <p className="mt-1 text-sm text-steel">Design, build & launch</p>
               </div>
             </div>
@@ -42,7 +42,7 @@ export default function CaseStudy() {
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-steel">
               Delivery model
             </p>
-            <h3 className="mt-3 font-display text-2xl font-semibold text-ink">
+            <h3 className="mt-3 font-display text-2xl font-semibold text-white">
               From brief to production — with support after go-live
             </h3>
             <p className="mt-4 text-base leading-relaxed text-steel">
@@ -52,7 +52,7 @@ export default function CaseStudy() {
             </p>
             <Link
               href="/contact"
-              className="mt-6 inline-flex text-sm font-semibold text-accent-deep hover:underline"
+              className="mt-6 inline-flex text-sm font-semibold text-signal hover:text-white"
             >
               Tell us about your project →
             </Link>

@@ -1,111 +1,74 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import Reveal, { Stagger, StaggerItem } from "@/components/motion/Reveal";
+import InteractiveCard from "@/components/ui/InteractiveCard";
 import { services } from "@/lib/content";
-
-const pillars = [
-  {
-    title: "Clarity first",
-    body: "We define goals, scope, and success metrics before a single pixel ships.",
-  },
-  {
-    title: "Built to perform",
-    body: "Clean engineering, thoughtful UX, and systems that stay maintainable.",
-  },
-  {
-    title: "Growth oriented",
-    body: "Every build is designed to attract, convert, or operate more efficiently.",
-  },
-  {
-    title: "Supported long-term",
-    body: "Launch is the start — we stay available for updates, fixes, and scale.",
-  },
-];
 
 export default function Services() {
   return (
-    <section id="services" className="section-grid bg-paper py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="max-w-2xl"
-        >
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent-deep">
-            What we do
+    <section id="services" className="section-light relative z-10 px-5 py-24 md:px-8 md:py-32">
+      <div className="mx-auto max-w-6xl">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
+            Services
           </p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl text-balance">
-            End-to-end digital services
+          <h2 className="mt-4 font-display section-title font-bold text-white">
+            What we <span className="text-signal">build</span>
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-steel">
-            From first concept to ongoing support, Zynovex helps businesses ship
-            professional digital experiences that look sharp and work hard.
+          <p className="mt-4 text-base leading-relaxed text-steel md:text-lg">
+            Full catalog on the homepage — websites, AI, marketing, dashboards,
+            booking, design, and support.
           </p>
-        </motion.div>
+        </Reveal>
 
-        <div id="approach" className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {pillars.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.06 }}
-              className="border-t border-ink/15 pt-4"
-            >
-              <h3 className="font-display text-lg font-semibold text-ink">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-steel">{item.body}</p>
-            </motion.div>
-          ))}
-        </div>
+        <Stagger className="mt-14 grid gap-6 md:grid-cols-2 md:gap-8">
+          {services.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <StaggerItem key={item.slug} index={index % 2} variant="jump">
+                <article id={item.slug} className="scroll-mt-28 h-full">
+                  <InteractiveCard className="min-h-[300px]">
+                    <div className="flex h-full flex-col p-7 md:p-8">
+                      <div className="mb-5 inline-flex w-fit rounded-2xl bg-accent/15 p-3 text-signal">
+                        <Icon size={22} strokeWidth={1.75} aria-hidden />
+                      </div>
+                      <h3 className="font-display text-2xl font-bold tracking-tight text-white md:text-3xl">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm font-medium text-signal">
+                        {item.short}
+                      </p>
+                      <p className="mt-4 text-sm leading-relaxed text-steel md:text-base">
+                        {item.body}
+                      </p>
+                      <ul className="mt-5 space-y-2">
+                        {item.points.map((point) => (
+                          <li
+                            key={point}
+                            className="flex gap-2 text-sm text-white/70"
+                          >
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </InteractiveCard>
+                </article>
+              </StaggerItem>
+            );
+          })}
+        </Stagger>
 
-        <div className="mt-20">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h3 className="font-display text-2xl font-bold text-ink md:text-3xl">
-              Our services
-            </h3>
-            <Link
-              href="/services"
-              className="text-sm font-semibold text-accent-deep hover:underline"
-            >
-              Full service details →
-            </Link>
-          </div>
-
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <motion.article
-                  key={service.slug}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: index * 0.04 }}
-                  className="group border-t border-ink/10 pt-5"
-                >
-                  <div className="mb-4 inline-flex rounded-md bg-mist p-2.5 text-accent-deep transition group-hover:bg-accent/20">
-                    <Icon size={22} strokeWidth={1.75} />
-                  </div>
-                  <h4 className="font-display text-lg font-semibold text-ink">
-                    {service.title}
-                  </h4>
-                  <p className="mt-2 text-sm leading-relaxed text-steel">{service.short}</p>
-                  <ul className="mt-3 space-y-1.5">
-                    {service.points.slice(0, 2).map((point) => (
-                      <li key={point} className="text-sm leading-relaxed text-steel/90">
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.article>
-              );
-            })}
-          </div>
-        </div>
+        <Reveal delay={0.05} className="mt-14 text-center">
+          <Link
+            href="/contact"
+            className="btn-primary inline-flex rounded-full px-6 py-3 text-sm font-semibold"
+          >
+            Discuss your project →
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

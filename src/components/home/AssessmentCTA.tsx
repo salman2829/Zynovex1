@@ -4,7 +4,6 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { createClient } from "@/lib/supabase/client";
-import { hasSupabaseEnv } from "@/lib/supabase/config";
 
 export default function AssessmentCTA() {
   const [email, setEmail] = useState("");
@@ -17,10 +16,6 @@ export default function AssessmentCTA() {
     setMessage("");
 
     try {
-      if (!hasSupabaseEnv()) {
-        throw new Error("Supabase is not configured yet.");
-      }
-
       const supabase = createClient();
       const { error } = await supabase.from("waitlist").insert({
         email: email.trim().toLowerCase(),
@@ -77,7 +72,7 @@ export default function AssessmentCTA() {
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.08 }}
             onSubmit={onSubmit}
-            className="rounded-lg border border-white/15 bg-white/5 p-6 backdrop-blur-sm"
+            className="rounded-lg border border-white/15 bg-white/5 p-6"
           >
             <label htmlFor="waitlist-email" className="text-sm font-medium text-white">
               Work email

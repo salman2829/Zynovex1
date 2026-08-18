@@ -1,50 +1,65 @@
 import Image from "next/image";
 
-type BrandLogoProps = {
-  className?: string;
-  priority?: boolean;
-  /** `full` = complete logo lockup, `mark` = Z icon only */
-  variant?: "full" | "mark";
+type Size = "sm" | "md" | "lg" | "hero";
+
+const sizeMap: Record<Size, { className: string; width: number; height: number }> = {
+  sm: { className: "h-11 w-auto md:h-12", width: 148, height: 130 },
+  md: { className: "h-14 w-auto", width: 180, height: 159 },
+  lg: { className: "h-20 w-auto md:h-24", width: 260, height: 230 },
+  hero: { className: "h-28 w-auto sm:h-32 md:h-40", width: 360, height: 318 },
 };
 
-export function BrandWordmark({ className = "" }: { className?: string }) {
+/** Official Zynovex agency logo lockup. */
+export function BrandLockup({
+  priority = false,
+  size = "md",
+}: {
+  priority?: boolean;
+  tone?: "light" | "dark";
+  size?: Size;
+}) {
+  const { className, width, height } = sizeMap[size];
+
   return (
-    <div className={`flex flex-col ${className}`}>
-      <span className="font-display flex items-center text-2xl font-bold tracking-[0.1em] text-white sm:text-3xl md:text-4xl">
-        ZYNOV
-        <span
-          className="mx-[0.08em] inline-flex h-[0.72em] w-[0.52em] flex-col justify-between py-[0.06em]"
-          aria-hidden
-        >
-          <span className="block h-[0.14em] w-full rounded-[1px] bg-signal" />
-          <span className="block h-[0.14em] w-full rounded-[1px] bg-signal" />
-          <span className="block h-[0.14em] w-full rounded-[1px] bg-signal" />
-        </span>
-        X
-      </span>
-      <span className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.38em] text-white/55 sm:text-[11px]">
-        Technologies
-      </span>
-    </div>
+    <Image
+      src="/logo-nav.png"
+      alt="Zynovex Technologies"
+      width={width}
+      height={height}
+      priority={priority}
+      quality={75}
+      sizes={`${Math.round(width * 2)}px`}
+      className={`${className} object-contain`}
+    />
   );
 }
 
 export default function BrandLogo({
-  className = "h-12",
+  className = "h-12 w-auto",
   priority = false,
-  variant = "full",
-}: BrandLogoProps) {
-  const isMark = variant === "mark";
+  variant = "badge",
+}: {
+  className?: string;
+  priority?: boolean;
+  variant?: "badge" | "mark" | "full";
+}) {
+  const src =
+    variant === "mark"
+      ? "/logo-mark.png"
+      : variant === "full"
+        ? "/logo-badge.png"
+        : "/logo-nav.png";
 
   return (
     <Image
-      src={isMark ? "/logo-mark.png" : "/logo-transparent.png"}
+      src={src}
       alt="Zynovex Technologies"
-      width={isMark ? 727 : 865}
-      height={isMark ? 291 : 606}
+      width={1128}
+      height={996}
       priority={priority}
-      sizes={isMark ? "(max-width: 768px) 110px, 140px" : "(max-width: 768px) 200px, 280px"}
-      className={`w-auto object-contain object-left ${className}`}
+      quality={75}
+      sizes="(max-width: 768px) 160px, 220px"
+      className={`object-contain ${className}`}
     />
   );
 }

@@ -1,23 +1,23 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function SignOutButton() {
-  const router = useRouter();
+type Props = {
+  redirectTo?: string;
+};
 
+export default function SignOutButton({ redirectTo = "/" }: Props) {
   async function signOut() {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.push("/");
-    router.refresh();
+    window.location.assign(redirectTo);
   }
 
   return (
     <button
       type="button"
       onClick={signOut}
-      className="rounded-md border border-line px-4 py-2 text-sm font-medium text-ink transition hover:border-accent hover:text-accent-deep"
+      className="rounded-full border border-white/20 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white transition hover:border-accent hover:bg-accent/15"
     >
       Sign out
     </button>

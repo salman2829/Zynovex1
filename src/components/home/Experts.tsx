@@ -1,53 +1,54 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Reveal, { Stagger, StaggerItem } from "@/components/motion/Reveal";
+import InteractiveCard from "@/components/ui/InteractiveCard";
 import { founders } from "@/lib/content";
 
 export default function Experts() {
   return (
-    <section className="bg-paper py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
-        >
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent-deep">
-            Leadership
+    <section className="section-dark relative z-10 px-5 py-24 md:px-8 md:py-32">
+      <div className="mx-auto max-w-6xl">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
+            Founders
           </p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-            Founded by builders who ship
+          <h2 className="mt-4 font-display section-title font-bold text-white">
+            Built by people who{" "}
+            <span className="text-signal">ship</span>
           </h2>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-steel">
-            Zynovex Technologies is led by Mohammad Salman and Korlapally Jashwanth —
-            partners focused on quality delivery and long-term client success.
+          <p className="mt-4 text-base leading-relaxed text-steel md:text-lg">
+            Work directly with the founders — fast decisions, clear ownership.
           </p>
-        </motion.div>
+        </Reveal>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-2">
-          {founders.map((expert, index) => (
-            <motion.article
-              key={expert.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="flex gap-5 border border-line bg-mist/40 p-6"
-            >
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-ink font-display text-lg font-bold text-accent">
-                {expert.initials}
-              </div>
-              <div>
-                <h3 className="font-display text-xl font-semibold text-ink">
-                  {expert.name}
-                </h3>
-                <p className="mt-1 text-sm font-medium text-accent-deep">{expert.role}</p>
-                <p className="mt-2 text-sm leading-relaxed text-steel">{expert.focus}</p>
-              </div>
-            </motion.article>
+        <Stagger className="mt-14 grid gap-6 md:grid-cols-2 md:gap-8">
+          {founders.map((person, index) => (
+            <StaggerItem key={person.name} index={index % 2} variant="jump">
+              <InteractiveCard className="min-h-[240px]">
+                <div className="p-8 md:p-10">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/15 font-display text-lg font-bold text-signal">
+                    {person.initials}
+                  </div>
+                  <h3 className="mt-6 font-display text-2xl font-bold tracking-tight text-white">
+                    {person.name}
+                  </h3>
+                  <p className="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-signal">
+                    {person.role}
+                  </p>
+                  {"phoneDisplay" in person && person.phoneDisplay ? (
+                    <a
+                      href={`tel:+91${person.phone}`}
+                      className="mt-2 inline-block text-sm font-medium text-white/70 transition hover:text-signal"
+                    >
+                      {person.phoneDisplay}
+                    </a>
+                  ) : null}
+                  <p className="mt-4 text-base leading-relaxed text-steel">{person.focus}</p>
+                </div>
+              </InteractiveCard>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   );

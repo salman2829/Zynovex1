@@ -1,17 +1,31 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), {
   ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgba(26,86,232,0.25),transparent_60%)]" />
-  ),
+  loading: () => null,
 });
 
+function CssFallback() {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute left-1/2 top-[44%] h-[92vmin] w-[92vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/22 blur-3xl" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(37,99,235,0.22),transparent_62%)]" />
+    </div>
+  );
+}
+
+/**
+ * CSS first for instant paint. WebGL mounts only after idle + when in view,
+ * and unmounts when scrolled away / tab hidden.
+ */
 export default function HeroScene() {
-  const [enabled, setEnabled] = useState(false);
+  const hostRef = useRef<HTMLDivElement>(null);
+  const [allow3d, setAllow3d] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [tabVisible, setTabVisible] = useState(true);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -19,24 +33,58 @@ export default function HeroScene() {
       "connection" in navigator &&
       (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
         ?.saveData;
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
 
-    if (!reduceMotion && !saveData) {
-      setEnabled(true);
+    if (reduceMotion || saveData || coarse) return;
+
+    let idleId = 0;
+    let timeoutId = 0;
+
+    const enable = () => setAllow3d(true);
+
+    if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(enable, { timeout: 2500 });
+    } else {
+      timeoutId = window.setTimeout(enable, 1200);
     }
+
+    return () => {
+      if (idleId && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
   }, []);
 
-  if (!enabled) {
-    return (
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-1/2 h-[70vmin] w-[70vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(26,86,232,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(26,86,232,0.08)_1px,transparent_1px)] bg-[size:48px_48px]" />
-      </div>
+  useEffect(() => {
+    const el = hostRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "0px", threshold: 0.15 },
     );
-  }
+    io.observe(el);
+
+    const onVis = () => setTabVisible(document.visibilityState === "visible");
+    document.addEventListener("visibilitychange", onVis);
+
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
+    };
+  }, []);
+
+  const showCanvas = allow3d && inView && tabVisible;
 
   return (
-    <div className="absolute inset-0 h-full w-full">
-      <HeroCanvas />
+    <div ref={hostRef} className="absolute inset-0 h-full w-full">
+      <CssFallback />
+      {showCanvas ? (
+        <div className="absolute inset-0 opacity-85">
+          <HeroCanvas />
+        </div>
+      ) : null}
     </div>
   );
 }

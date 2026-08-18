@@ -111,12 +111,16 @@ export const founders = [
     initials: "MS",
     role: "Co-founder",
     focus: "Engineering, platforms, and scalable technical architecture",
+    phone: "7416922398",
+    phoneDisplay: "+91 74169 22398",
   },
   {
     name: "Korlapally Jashwanth",
     initials: "KJ",
     role: "Co-founder",
     focus: "Product strategy, client delivery, and digital growth systems",
+    phone: "9392801138",
+    phoneDisplay: "+91 93928 01138",
   },
 ];
 
