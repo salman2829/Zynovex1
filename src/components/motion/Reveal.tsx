@@ -12,7 +12,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const variants: Record<string, Variants> = {
   up: {
-    hidden: { opacity: 0, y: 32 },
+    hidden: { opacity: 0, y: 36 },
     visible: { opacity: 1, y: 0 },
   },
   fade: {
@@ -20,26 +20,32 @@ const variants: Record<string, Variants> = {
     visible: { opacity: 1 },
   },
   left: {
-    hidden: { opacity: 0, x: -24 },
+    hidden: { opacity: 0, x: -28 },
     visible: { opacity: 1, x: 0 },
   },
   right: {
-    hidden: { opacity: 0, x: 24 },
+    hidden: { opacity: 0, x: 28 },
     visible: { opacity: 1, x: 0 },
   },
   scale: {
-    hidden: { opacity: 0, y: 24, scale: 0.96 },
+    hidden: { opacity: 0, y: 28, scale: 0.95 },
     visible: { opacity: 1, y: 0, scale: 1 },
   },
   card: {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 48 },
     visible: { opacity: 1, y: 0 },
   },
-  /** Clear jump-in when card enters the viewport */
   jump: {
-    hidden: { opacity: 0, y: 88, scale: 0.9 },
+    hidden: { opacity: 0, y: 96, scale: 0.88 },
     visible: { opacity: 1, y: 0, scale: 1 },
   },
+};
+
+/** Cards must enter this viewport band to count as visible — leaving resets them. */
+const replayViewport = {
+  once: false as const,
+  amount: 0.45,
+  margin: "-12% 0px -18% 0px",
 };
 
 type RevealProps = {
@@ -59,11 +65,7 @@ export default function Reveal({
 }: RevealProps) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, {
-    amount: 0.2,
-    once: false,
-    margin: "0px 0px -12% 0px",
-  });
+  const inView = useInView(ref, replayViewport);
   const Comp = motion[as];
 
   if (reduce) {
@@ -78,7 +80,11 @@ export default function Reveal({
       variants={variants[variant]}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
-      transition={{ duration: 0.45, delay, ease }}
+      transition={
+        inView
+          ? { duration: 0.45, delay, ease }
+          : { duration: 0.2, ease }
+      }
     >
       {children}
     </Comp>
@@ -98,7 +104,8 @@ export function Stagger({
 }
 
 /**
- * Card jumps in whenever it scrolls into view (replays on every visit).
+ * Jumps in every time the card scrolls into view.
+ * Resets when it leaves so the next scroll-in jumps again.
  */
 export function StaggerItem({
   children,
@@ -113,11 +120,7 @@ export function StaggerItem({
 }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, {
-    amount: 0.2,
-    once: false,
-    margin: "0px 0px -10% 0px",
-  });
+  const inView = useInView(ref, replayViewport);
 
   if (reduce) {
     return <div className={className}>{children}</div>;
@@ -133,18 +136,24 @@ export function StaggerItem({
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       transition={
-        isJump
-          ? {
-              type: "spring",
-              stiffness: 320,
-              damping: 16,
-              mass: 0.9,
-              delay: inView ? Math.min(index * 0.1, 0.2) : 0,
-            }
+        inView
+          ? isJump
+            ? {
+                type: "spring",
+                stiffness: 300,
+                damping: 14,
+                mass: 0.85,
+                delay: Math.min(index * 0.1, 0.2),
+              }
+            : {
+                duration: 0.45,
+                delay: Math.min(index * 0.08, 0.16),
+                ease,
+              }
           : {
-              duration: 0.45,
-              delay: inView ? Math.min(index * 0.08, 0.16) : 0,
-              ease,
+              // Fast reset when leaving viewport so next jump is ready
+              duration: 0.15,
+              ease: "easeIn",
             }
       }
     >
