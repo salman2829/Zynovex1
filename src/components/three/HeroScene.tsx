@@ -37,22 +37,22 @@ export default function HeroScene() {
 
     if (reduceMotion || saveData || coarse) return;
 
-    let idleId = 0;
-    let timeoutId = 0;
+    let idleId: number | undefined;
+    let timeoutId: number | undefined;
 
     const enable = () => setAllow3d(true);
 
-    if ("requestIdleCallback" in window) {
+    if (typeof window.requestIdleCallback === "function") {
       idleId = window.requestIdleCallback(enable, { timeout: 2500 });
     } else {
       timeoutId = window.setTimeout(enable, 1200);
     }
 
     return () => {
-      if (idleId && "cancelIdleCallback" in window) {
+      if (idleId !== undefined && typeof window.cancelIdleCallback === "function") {
         window.cancelIdleCallback(idleId);
       }
-      if (timeoutId) window.clearTimeout(timeoutId);
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
     };
   }, []);
 

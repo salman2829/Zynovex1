@@ -16,9 +16,9 @@ export default function LeadQuoteForm() {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [serviceInterest, setServiceInterest] = useState(websiteTypeOptions[0]);
+  const [serviceInterest, setServiceInterest] = useState<string>(websiteTypeOptions[0]);
   const [budgetIndex, setBudgetIndex] = useState(2);
-  const [timeline, setTimeline] = useState(timelineOptions[2]);
+  const [timeline, setTimeline] = useState<string>(timelineOptions[2]);
   const [notes, setNotes] = useState("");
   const [serious, setSerious] = useState(false);
   const [captchaA] = useState(() => 2 + Math.floor(Math.random() * 5));
