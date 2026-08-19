@@ -74,7 +74,7 @@ function SceneContent() {
   return (
     <>
       <ambientLight intensity={0.55} />
-      <group position={[0, 0.05, 0]} scale={0.78}>
+      <group position={[0, 0, 0]} scale={0.78}>
         <WireGlobe />
         <OrbitNodes />
       </group>
@@ -87,7 +87,7 @@ export default function HeroCanvas() {
     <Canvas
       className="!absolute inset-0 h-full w-full touch-none"
       dpr={1}
-      camera={{ position: [0, 0.35, 6.2], fov: 48 }}
+      camera={{ position: [0, 0, 6.2], fov: 48 }}
       gl={{
         antialias: false,
         alpha: true,

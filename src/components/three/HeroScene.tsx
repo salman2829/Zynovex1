@@ -11,8 +11,8 @@ const HeroCanvas = dynamic(() => import("./HeroCanvas"), {
 function CssFallback() {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute left-1/2 top-[44%] h-[72vmin] w-[72vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/22 blur-3xl" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(37,99,235,0.22),transparent_52%)]" />
+      <div className="absolute left-1/2 top-1/2 h-[72vmin] w-[72vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/22 blur-3xl" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.22),transparent_52%)]" />
     </div>
   );
 }
