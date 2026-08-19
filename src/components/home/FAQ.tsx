@@ -34,7 +34,7 @@ export default function FAQ() {
   return (
     <section className="section-panel relative z-10 px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-3xl">
-        <Reveal className="text-center">
+        <Reveal className="text-center" variant="scale">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
             FAQ
           </p>
@@ -43,7 +43,10 @@ export default function FAQ() {
           </h2>
         </Reveal>
 
-        <Stagger className="mt-12 divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] px-5 md:px-7">
+        <Stagger
+          className="mt-12 divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] px-5 md:px-7"
+          stagger={0.08}
+        >
           {faqs.map((item, index) => {
             const isOpen = open === index;
             return (

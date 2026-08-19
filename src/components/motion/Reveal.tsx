@@ -2,18 +2,16 @@
 
 import {
   motion,
-  useInView,
   useReducedMotion,
   type Variants,
-  type UseInViewOptions,
 } from "framer-motion";
-import { useRef, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
-const ease = [0.22, 1, 0.36, 1] as const;
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const variants: Record<string, Variants> = {
   up: {
-    hidden: { opacity: 0, y: 36 },
+    hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0 },
   },
   fade: {
@@ -21,33 +19,39 @@ const variants: Record<string, Variants> = {
     visible: { opacity: 1 },
   },
   left: {
-    hidden: { opacity: 0, x: -28 },
-    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: -48, y: 24 },
+    visible: { opacity: 1, x: 0, y: 0 },
   },
   right: {
-    hidden: { opacity: 0, x: 28 },
-    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: 48, y: 24 },
+    visible: { opacity: 1, x: 0, y: 0 },
   },
   scale: {
-    hidden: { opacity: 0, y: 28, scale: 0.95 },
+    hidden: { opacity: 0, y: 32, scale: 0.94 },
     visible: { opacity: 1, y: 0, scale: 1 },
   },
   card: {
-    hidden: { opacity: 0, y: 48 },
-    visible: { opacity: 1, y: 0 },
+    hidden: { opacity: 0, y: 72, scale: 0.92 },
+    visible: { opacity: 1, y: 0, scale: 1 },
   },
   jump: {
-    hidden: { opacity: 0, y: 96, scale: 0.88 },
+    hidden: { opacity: 0, y: 80, scale: 0.9 },
     visible: { opacity: 1, y: 0, scale: 1 },
   },
 };
 
-/** Cards must enter this viewport band to count as visible — leaving resets them. */
-const replayViewport: UseInViewOptions = {
-  once: false,
-  amount: 0.45,
-  margin: "-12% 0px -18% 0px",
-};
+/** Each card must cross this band before it animates (scroll-driven, one-by-one). */
+const cardViewport = {
+  once: true,
+  amount: 0.2,
+  margin: "0px 0px -8% 0px",
+} as const;
+
+const revealViewport = {
+  once: true,
+  amount: 0.4,
+  margin: "0px 0px -8% 0px",
+} as const;
 
 type RevealProps = {
   children: ReactNode;
@@ -65,8 +69,6 @@ export default function Reveal({
   variant = "up",
 }: RevealProps) {
   const reduce = useReducedMotion();
-  const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, replayViewport);
   const Comp = motion[as];
 
   if (reduce) {
@@ -75,38 +77,61 @@ export default function Reveal({
 
   return (
     <Comp
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ref={ref as any}
       className={className}
       variants={variants[variant]}
       initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-      transition={
-        inView
-          ? { duration: 0.45, delay, ease }
-          : { duration: 0.2, ease }
-      }
+      whileInView="visible"
+      viewport={revealViewport}
+      transition={{ duration: 0.65, delay, ease }}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </Comp>
   );
 }
 
+/** Coordinates the sequential stagger entry of all StaggerItem children when scrolled into view. */
 export function Stagger({
   children,
   className,
+  delay = 0,
+  stagger = 0.15,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   stagger?: number;
 }) {
-  return <div className={className}>{children}</div>;
+  const reduce = useReducedMotion();
+
+  if (reduce) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.12, margin: "0px 0px -10% 0px" }}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: stagger,
+            delayChildren: delay,
+          },
+        },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
 }
 
 /**
- * Jumps in every time the card scrolls into view.
- * Resets when it leaves so the next scroll-in jumps again.
+ * Coordinated child component of Stagger.
+ * Inherits parent visible state and animates sequentially.
  */
 export function StaggerItem({
   children,
@@ -120,43 +145,20 @@ export function StaggerItem({
   index?: number;
 }) {
   const reduce = useReducedMotion();
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, replayViewport);
 
   if (reduce) {
     return <div className={className}>{children}</div>;
   }
 
-  const isJump = variant === "jump";
-
   return (
     <motion.div
-      ref={ref}
       className={className}
       variants={variants[variant]}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-      transition={
-        inView
-          ? isJump
-            ? {
-                type: "spring",
-                stiffness: 300,
-                damping: 14,
-                mass: 0.85,
-                delay: Math.min(index * 0.1, 0.2),
-              }
-            : {
-                duration: 0.45,
-                delay: Math.min(index * 0.08, 0.16),
-                ease,
-              }
-          : {
-              // Fast reset when leaving viewport so next jump is ready
-              duration: 0.15,
-              ease: "easeIn",
-            }
-      }
+      transition={{
+        duration: 0.8,
+        ease,
+      }}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </motion.div>

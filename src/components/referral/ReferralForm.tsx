@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { websiteTypeOptions } from "@/lib/contact";
 import {
   estimateReferralReward,
@@ -48,35 +47,53 @@ export default function ReferralForm() {
       return;
     }
 
+    if (!referrerName.trim() || !referrerEmail.trim() || !referrerPhone.trim()) {
+      setStatus("error");
+      setFeedback("Please fill your name, email, and phone in Your details.");
+      return;
+    }
+
+    if (!clientName.trim() || !clientPhone.trim()) {
+      setStatus("error");
+      setFeedback("Please fill the client name and phone.");
+      return;
+    }
+
     setStatus("loading");
 
     try {
-      const supabase = createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      const { error } = await supabase.from("referrals").insert({
-        user_id: user?.id ?? null,
-        referrer_name: referrerName.trim(),
-        referrer_email: referrerEmail.trim().toLowerCase(),
-        referrer_phone: referrerPhone.trim(),
-        referrer_upi: referrerUpi.trim() || null,
-        client_name: clientName.trim(),
-        client_company: clientCompany.trim() || null,
-        client_email: clientEmail.trim().toLowerCase() || null,
-        client_phone: clientPhone.trim(),
-        service_interest: serviceInterest,
-        estimated_budget: estimatedBudget,
-        notes: notes.trim(),
-        status: "new",
+      const res = await fetch("/api/referrals", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          referrerName: referrerName.trim(),
+          referrerEmail: referrerEmail.trim(),
+          referrerPhone: referrerPhone.trim(),
+          referrerUpi: referrerUpi.trim(),
+          clientName: clientName.trim(),
+          clientCompany: clientCompany.trim(),
+          clientEmail: clientEmail.trim(),
+          clientPhone: clientPhone.trim(),
+          serviceInterest,
+          estimatedBudget,
+          notes: notes.trim(),
+        }),
       });
 
-      if (error) throw error;
+      const payload = (await res.json()) as {
+        error?: string;
+        message?: string;
+        ok?: boolean;
+      };
+
+      if (!res.ok) {
+        throw new Error(payload.error || "Could not submit referral.");
+      }
 
       setStatus("done");
       setFeedback(
-        "Referral submitted. We’ll review it and update you when the lead progresses.",
+        payload.message ||
+          "Referral submitted. We’ll review it and update you when the lead progresses.",
       );
       setReferrerName("");
       setReferrerEmail("");

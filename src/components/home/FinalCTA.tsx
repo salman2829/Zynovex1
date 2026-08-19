@@ -1,12 +1,46 @@
 "use client";
 
 import Link from "next/link";
+import { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import Reveal from "@/components/motion/Reveal";
+import MotionPress from "@/components/motion/MotionPress";
 
 export default function FinalCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const glowScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    reduce ? [1, 1, 1] : [0.85, 1.05, 0.95],
+  );
+  const glowOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.45, 1],
+    reduce ? [0.25, 0.25, 0.25] : [0.12, 0.4, 0.18],
+  );
+
   return (
-    <section className="atmosphere relative z-10 overflow-hidden px-5 py-24 md:px-8 md:py-32">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_40%,rgba(37,99,235,0.25),transparent_60%)]" />
+    <section
+      ref={sectionRef}
+      className="atmosphere relative z-10 overflow-hidden px-5 py-24 md:px-8 md:py-32"
+    >
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[70vmax] w-[70vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.35),transparent_60%)] will-change-transform"
+        style={{ scale: glowScale, opacity: glowOpacity }}
+      />
 
       <div className="relative mx-auto max-w-3xl text-center">
         <Reveal variant="scale">
@@ -22,18 +56,22 @@ export default function FinalCTA() {
             Tell us the problem. We’ll come back with a clear plan — and ship it.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/contact"
-              className="btn-primary inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold"
-            >
-              Start a project →
-            </Link>
-            <Link
-              href="/auth/login"
-              className="btn-ghost inline-flex items-center rounded-full px-6 py-3.5 text-sm font-semibold"
-            >
-              Client login
-            </Link>
+            <MotionPress>
+              <Link
+                href="/contact"
+                className="btn-primary inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold"
+              >
+                Start a project →
+              </Link>
+            </MotionPress>
+            <MotionPress>
+              <Link
+                href="/auth/login"
+                className="btn-ghost inline-flex items-center rounded-full px-6 py-3.5 text-sm font-semibold"
+              >
+                Client login
+              </Link>
+            </MotionPress>
           </div>
         </Reveal>
       </div>

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState, startTransition } from "react";
 import { BrandLockup } from "@/components/brand/BrandLogo";
+import MotionPress from "@/components/motion/MotionPress";
 import { createClient } from "@/lib/supabase/client";
 import { hasSupabaseEnv } from "@/lib/supabase/config";
 
@@ -21,6 +22,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [accountHref, setAccountHref] = useState("/contact");
   const [accountLabel, setAccountLabel] = useState("Start a project");
+  const [signedIn, setSignedIn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -29,14 +31,17 @@ export default function Navbar() {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 16);
+        // Past ~half the hero on home; sooner on inner pages
+        const threshold =
+          pathname === "/" ? Math.min(window.innerHeight * 0.55, 420) : 24;
+        setScrolled(window.scrollY > threshold);
         ticking = false;
       });
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (!hasSupabaseEnv()) return;
@@ -49,6 +54,7 @@ export default function Navbar() {
         if (!alive) return;
         if (!userId) {
           startTransition(() => {
+            setSignedIn(false);
             setAccountHref("/contact");
             setAccountLabel("Start a project");
           });
@@ -64,6 +70,7 @@ export default function Navbar() {
         if (!alive) return;
         const admin = data?.role === "admin";
         startTransition(() => {
+          setSignedIn(true);
           setAccountHref(admin ? "/admin" : "/dashboard");
           setAccountLabel(admin ? "Admin" : "Dashboard");
         });
@@ -91,10 +98,12 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
       <nav
-        className={`mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full px-3 transition-colors duration-200 md:h-16 md:px-4 ${
+        className={`mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 md:h-16 md:px-4 ${
           scrolled
-            ? "border border-white/10 bg-ink/95"
-            : "border border-white/5 bg-ink/70"
+            ? "border border-white/12 bg-ink/75 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.65)] backdrop-blur-xl"
+            : pathname === "/"
+              ? "border border-transparent bg-transparent backdrop-blur-0"
+              : "border border-white/5 bg-ink/50 backdrop-blur-md"
         }`}
       >
         <Link
@@ -118,15 +127,28 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href={accountHref}
-            prefetch
-            className="btn-primary inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold"
-          >
-            {accountLabel}
-            {accountHref === "/contact" && <span aria-hidden>→</span>}
-          </Link>
+        <div className="hidden items-center gap-2 md:flex">
+          {!signedIn && (
+            <MotionPress>
+              <Link
+                href="/auth/login"
+                prefetch
+                className="btn-ghost inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold"
+              >
+                Client login
+              </Link>
+            </MotionPress>
+          )}
+          <MotionPress>
+            <Link
+              href={accountHref}
+              prefetch
+              className="btn-primary inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold"
+            >
+              {accountLabel}
+              {accountHref === "/contact" && <span aria-hidden>→</span>}
+            </Link>
+          </MotionPress>
         </div>
 
         <button
@@ -147,6 +169,15 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            {!signedIn && (
+              <Link
+                href="/auth/login"
+                prefetch
+                className="btn-ghost mt-2 rounded-full px-4 py-2.5 text-center text-sm font-semibold"
+              >
+                Client login
+              </Link>
+            )}
             <Link
               href={accountHref}
               prefetch
