@@ -33,9 +33,8 @@ export default function HeroScene() {
       "connection" in navigator &&
       (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
         ?.saveData;
-    const coarse = window.matchMedia("(pointer: coarse)").matches;
 
-    if (reduceMotion || saveData || coarse) return;
+    if (reduceMotion || saveData) return;
 
     let idleId: number | undefined;
     let timeoutId: number | undefined;
