@@ -74,7 +74,7 @@ function SceneContent() {
   return (
     <>
       <ambientLight intensity={0.55} />
-      <group position={[0, 0.05, 0]}>
+      <group position={[0, 0.05, 0]} scale={0.78}>
         <WireGlobe />
         <OrbitNodes />
       </group>
