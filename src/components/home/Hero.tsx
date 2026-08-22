@@ -76,11 +76,12 @@ export default function Hero() {
         </p>
 
         <h1 className="mt-5 w-full text-center font-display hero-title font-bold text-white">
-          <span className="block">Future-ready</span>
-          <span className="block bg-gradient-to-r from-signal to-accent bg-clip-text text-transparent">
+          <span className="sr-only">Zynovex Technologies — Digital Solutions Built to Grow Your Business</span>
+          <span className="block" aria-hidden="true">Future-ready</span>
+          <span className="block bg-gradient-to-r from-signal to-accent bg-clip-text text-transparent" aria-hidden="true">
             digital products,
           </span>
-          <span className="block">engineered to grow.</span>
+          <span className="block" aria-hidden="true">engineered to grow.</span>
         </h1>
 
         <p className="mx-auto mt-6 max-w-xl text-center text-base leading-relaxed text-steel md:text-lg">

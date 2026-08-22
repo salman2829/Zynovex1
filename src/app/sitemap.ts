@@ -1,8 +1,16 @@
 import { MetadataRoute } from "next";
+import { services } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.zynovextechnologies.in";
   const currentDate = new Date();
+
+  const serviceUrls = services.map((service) => ({
+    url: `${baseUrl}/services/${service.slug}`,
+    lastModified: currentDate,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
 
   return [
     {
@@ -23,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...serviceUrls,
     {
       url: `${baseUrl}/contact`,
       lastModified: currentDate,

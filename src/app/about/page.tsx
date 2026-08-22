@@ -4,7 +4,7 @@ import { founders } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "About Zynovex Technologies | Digital Solutions & Technology",
+    absolute: "About Zynovex Technologies | Technology & Digital Solutions",
   },
   description:
     "Learn about Zynovex Technologies and our approach to building modern websites, software, AI automations, dashboards, and digital solutions for businesses.",
@@ -19,12 +19,13 @@ export default function AboutPage() {
       <section className="atmosphere px-5 pb-20 pt-32 md:px-8 md:pb-28 md:pt-40">
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-signal">
-            About Zynovex
+            About Zynovex Technologies
           </p>
           <h1 className="mt-5 font-display section-title font-extrabold">
-            A digital agency
-            <br />
-            built to <span className="text-signal">ship.</span>
+            <span className="sr-only">About Zynovex Technologies — Technology & Digital Solutions</span>
+            <span aria-hidden="true">A digital agency</span>
+            <br aria-hidden="true" />
+            <span aria-hidden="true">built to </span><span className="text-signal" aria-hidden="true">ship.</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-steel">
             Founded by Mohammad Salman and Korlapally Jashwanth, Zynovex helps

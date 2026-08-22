@@ -10,10 +10,10 @@ import FinalCTA from "@/components/home/FinalCTA";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Zynovex Technologies | Digital Products That Grow Your Business",
+    absolute: "Zynovex Technologies | AI, Web & Digital Solutions",
   },
   description:
-    "Zynovex Technologies builds websites, AI automations, digital marketing systems, dashboards, booking platforms, UI/UX experiences, and custom digital solutions for businesses.",
+    "Zynovex Technologies builds websites, custom software, AI automation systems, dashboards, and digital products that solve problems and help businesses grow.",
   alternates: {
     canonical: "https://www.zynovextechnologies.in/",
   },
@@ -26,11 +26,12 @@ const jsonLd = {
       "@type": "Organization",
       "@id": "https://www.zynovextechnologies.in/#organization",
       "name": "Zynovex Technologies",
+      "alternateName": "Zynovex",
       "url": "https://www.zynovextechnologies.in/",
       "logo": "https://www.zynovextechnologies.in/logo-badge.png",
       "email": "hello@zynovex.tech",
       "description":
-        "Zynovex Technologies builds websites, AI automations, digital marketing systems, dashboards, booking platforms, UI/UX experiences, and custom digital solutions for businesses.",
+        "Zynovex Technologies builds websites, custom software, AI automation systems, dashboards, and digital products that solve problems and help businesses grow.",
       "contactPoint": [
         {
           "@type": "ContactPoint",
@@ -45,12 +46,16 @@ const jsonLd = {
           "availableLanguage": "English",
         },
       ],
+      "sameAs": [
+        "https://www.linkedin.com/company/zynovex-technologies"
+      ],
     },
     {
       "@type": "WebSite",
       "@id": "https://www.zynovextechnologies.in/#website",
       "url": "https://www.zynovextechnologies.in/",
       "name": "Zynovex Technologies",
+      "alternateName": "Zynovex",
       "publisher": {
         "@id": "https://www.zynovextechnologies.in/#organization",
       },
