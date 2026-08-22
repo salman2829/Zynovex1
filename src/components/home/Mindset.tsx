@@ -60,7 +60,7 @@ export default function Mindset() {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
             How we work
           </p>
-          <h2 className="mt-4 font-display section-title font-bold text-white">
+          <h2 className="mt-4 font-display section-title font-bold text-navy">
             The Zynovex <span className="text-signal">mindset</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-steel md:text-lg">
@@ -77,7 +77,7 @@ export default function Mindset() {
                   <p className="font-display text-xs font-bold tracking-[0.24em] text-signal transition group-hover:tracking-[0.3em]">
                     {`0${index + 1}`}
                   </p>
-                  <h3 className="mt-4 font-display text-xl font-bold text-white md:text-2xl">
+                  <h3 className="mt-4 font-display text-xl font-bold text-navy md:text-2xl">
                     {item.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-steel md:text-base">

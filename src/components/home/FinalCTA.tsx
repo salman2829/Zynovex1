@@ -47,7 +47,7 @@ export default function FinalCTA() {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
             Next step
           </p>
-          <h2 className="mt-5 font-display section-title font-bold text-white">
+          <h2 className="mt-5 font-display section-title font-bold text-navy">
             Ready to build something
             <br />
             that <span className="text-signal">works?</span>

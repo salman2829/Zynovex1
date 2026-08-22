@@ -4,8 +4,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useMemo, useRef } from "react";
 import * as THREE from "three";
 
-const CYAN = "#38bdf8";
-const BLUE = "#2563eb";
+const CYAN = "#1264E8"; // Primary Blue
+const BLUE = "#071426"; // Navy
 
 function WireGlobe() {
   const group = useRef<THREE.Group>(null);

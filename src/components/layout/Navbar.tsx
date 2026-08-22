@@ -100,10 +100,10 @@ export default function Navbar() {
       <nav
         className={`mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 md:h-16 md:px-4 ${
           scrolled
-            ? "border border-white/12 bg-ink/75 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.65)] backdrop-blur-xl"
+            ? "border border-navy/8 bg-ink/80 shadow-[0_10px_30px_-12px_rgba(7,20,38,0.12)] backdrop-blur-xl"
             : pathname === "/"
               ? "border border-transparent bg-transparent backdrop-blur-0"
-              : "border border-white/5 bg-ink/50 backdrop-blur-md"
+              : "border border-navy/5 bg-ink/60 backdrop-blur-md"
         }`}
       >
         <Link
@@ -114,13 +114,13 @@ export default function Navbar() {
           <BrandLockup priority size="sm" />
         </Link>
 
-        <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] px-2 py-1 md:flex">
+        <div className="hidden items-center gap-1 rounded-full border border-navy/8 bg-navy/[0.02] px-2 py-1 md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               prefetch
-              className="rounded-full px-3.5 py-1.5 text-sm font-medium text-steel transition-colors hover:bg-white/5 hover:text-white"
+              className="rounded-full px-3.5 py-1.5 text-sm font-medium text-steel transition-colors hover:bg-navy/5 hover:text-navy"
             >
               {link.label}
             </Link>
@@ -154,7 +154,7 @@ export default function Navbar() {
         <button
           type="button"
           aria-label="Toggle menu"
-          className="mr-1 text-white md:hidden"
+          className="mr-1 text-navy md:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -162,10 +162,10 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="mx-auto mt-2 max-w-6xl rounded-2xl border border-white/10 bg-ink px-5 py-4 md:hidden">
+        <div className="mx-auto mt-2 max-w-6xl rounded-2xl border border-navy/10 bg-white px-5 py-4 shadow-lg md:hidden">
           <div className="flex flex-col gap-2">
             {links.map((link) => (
-              <Link key={link.href} href={link.href} prefetch className="py-2 text-white/80">
+              <Link key={link.href} href={link.href} prefetch className="py-2 text-foreground/80 hover:text-navy">
                 {link.label}
               </Link>
             ))}

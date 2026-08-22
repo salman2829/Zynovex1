@@ -27,7 +27,7 @@ export default function ReferralPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-signal">
               Refer & earn
             </p>
-            <h1 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+            <h1 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-navy md:text-5xl">
               Bring us a client.
               <span className="block text-signal">Earn when we close.</span>
             </h1>
@@ -60,7 +60,7 @@ export default function ReferralPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
               How it works
             </p>
-            <h2 className="mt-3 font-display section-title font-bold text-white">
+            <h2 className="mt-3 font-display section-title font-bold text-navy">
               Simple. Transparent. Paid on close.
             </h2>
           </Reveal>
@@ -68,11 +68,11 @@ export default function ReferralPage() {
           <Stagger className="mt-12 grid gap-6 md:grid-cols-3">
             {referralSteps.map((step, index) => (
               <StaggerItem key={step.title} index={index} variant="jump">
-                <div className="hover-flash h-full rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-7">
-                  <p className="font-display text-4xl font-bold text-white/10">
+                <div className="hover-flash h-full rounded-[1.5rem] border border-navy/10 bg-white/[0.04] p-7">
+                  <p className="font-display text-4xl font-bold text-navy/10">
                     0{index + 1}
                   </p>
-                  <h3 className="mt-4 font-display text-xl font-bold text-white">
+                  <h3 className="mt-4 font-display text-xl font-bold text-navy">
                     {step.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-steel">
@@ -91,7 +91,7 @@ export default function ReferralPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
               Rewards
             </p>
-            <h2 className="mt-3 font-display section-title font-bold text-white">
+            <h2 className="mt-3 font-display section-title font-bold text-navy">
               Commission by project value
             </h2>
             <p className="mt-4 text-steel">
@@ -103,11 +103,11 @@ export default function ReferralPage() {
           <Stagger className="mt-12 grid gap-5 sm:grid-cols-2">
             {referralCommissionTiers.map((tier, index) => (
               <StaggerItem key={tier.label} index={index % 2} variant="jump">
-                <article className="hover-flash h-full rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-7">
+                <article className="hover-flash h-full rounded-[1.5rem] border border-navy/10 bg-white/[0.04] p-7">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-signal">
                     {tier.label}
                   </p>
-                  <h3 className="mt-3 font-display text-2xl font-bold text-white">
+                  <h3 className="mt-3 font-display text-2xl font-bold text-navy">
                     {tier.range}
                   </h3>
                   <p className="mt-2 text-lg font-semibold text-signal">
@@ -132,7 +132,7 @@ export default function ReferralPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
               Submit
             </p>
-            <h2 className="mt-3 font-display text-3xl font-bold text-white md:text-4xl">
+            <h2 className="mt-3 font-display text-3xl font-bold text-navy md:text-4xl">
               Refer a client
             </h2>
             <p className="mt-4 text-base leading-relaxed text-steel">

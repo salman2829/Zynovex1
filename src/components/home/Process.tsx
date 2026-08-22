@@ -93,7 +93,7 @@ export default function Process() {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
             Engagement
           </p>
-          <h2 className="mt-4 font-display section-title font-bold text-white">
+          <h2 className="mt-4 font-display section-title font-bold text-navy">
             Discover. Design.{" "}
             <span className="text-signal">Deliver.</span>
           </h2>
@@ -114,13 +114,13 @@ export default function Process() {
             <StaggerItem key={step.label} index={index} variant="jump">
               <InteractiveCard className="min-h-[280px]">
                 <div className="p-7 md:p-8">
-                  <p className="font-display text-5xl font-bold text-white/10 transition group-hover:text-signal/30">
+                  <p className="font-display text-5xl font-bold text-navy/10 transition group-hover:text-signal/30">
                     0{index + 1}
                   </p>
                   <p className="mt-4 text-xs font-bold uppercase tracking-[0.28em] text-signal">
                     {step.label}
                   </p>
-                  <h3 className="mt-3 font-display text-2xl font-bold text-white">
+                  <h3 className="mt-3 font-display text-2xl font-bold text-navy">
                     {step.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-steel">

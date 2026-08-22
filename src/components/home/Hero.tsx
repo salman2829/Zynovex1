@@ -71,11 +71,11 @@ export default function Hero() {
         className="relative z-10 mx-auto flex min-h-[100svh] max-w-4xl flex-col items-center justify-center px-5 pb-20 pt-32 text-center will-change-transform md:px-8 md:pb-24 md:pt-36"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        <p className="font-display text-sm font-bold tracking-[0.34em] text-white">
+        <p className="font-display text-sm font-bold tracking-[0.34em] text-navy">
           ZYNOVEX
         </p>
 
-        <h1 className="mt-5 w-full text-center font-display hero-title font-bold text-white">
+        <h1 className="mt-5 w-full text-center font-display hero-title font-bold text-navy">
           <span className="block">Future-ready</span>
           <span className="block bg-gradient-to-r from-signal to-accent bg-clip-text text-transparent">
             digital products,
@@ -116,7 +116,7 @@ export default function Hero() {
               key={item.label}
               className="hover-flash glass rounded-2xl px-3 py-4 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-signal/40 md:px-4"
             >
-              <p className="font-display text-sm font-bold text-white md:text-base">
+              <p className="font-display text-sm font-bold text-navy md:text-base">
                 {item.label}
               </p>
               <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-signal">

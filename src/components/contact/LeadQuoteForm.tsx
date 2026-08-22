@@ -10,7 +10,7 @@ import {
 } from "@/lib/contact";
 
 const fieldClass =
-  "mt-1.5 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2.5 text-sm text-white outline-none placeholder:text-steel focus:border-signal";
+  "mt-1.5 w-full rounded-lg border border-navy/15 bg-white px-3 py-2.5 text-sm text-foreground outline-none transition placeholder:text-steel focus:border-accent";
 
 export default function LeadQuoteForm() {
   const [fullName, setFullName] = useState("");
@@ -108,7 +108,7 @@ export default function LeadQuoteForm() {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div>
-        <h2 className="font-display text-xl font-bold text-white md:text-2xl">
+        <h2 className="font-display text-xl font-bold text-navy md:text-2xl">
           Get your free project quote
         </h2>
         <p className="mt-1.5 text-sm text-steel">
@@ -116,7 +116,7 @@ export default function LeadQuoteForm() {
         </p>
       </div>
 
-      <label className="block text-sm font-medium text-white/80">
+      <label className="block text-sm font-medium text-navy/80">
         Your name
         <input
           required
@@ -127,10 +127,10 @@ export default function LeadQuoteForm() {
         />
       </label>
 
-      <label className="block text-sm font-medium text-white/80">
+      <label className="block text-sm font-medium text-navy/80">
         Phone / WhatsApp number
-        <div className="mt-1.5 flex overflow-hidden rounded-lg border border-white/15 bg-white/5 focus-within:border-signal">
-          <span className="flex items-center border-r border-white/10 px-3 text-sm text-steel">
+        <div className="mt-1.5 flex overflow-hidden rounded-lg border border-navy/15 bg-white focus-within:border-accent">
+          <span className="flex items-center border-r border-navy/10 px-3 text-sm text-steel">
             +91
           </span>
           <input
@@ -138,13 +138,13 @@ export default function LeadQuoteForm() {
             inputMode="numeric"
             value={phone}
             onChange={(e) => setPhone(e.target.value.replace(/[^\d\s]/g, ""))}
-            className="w-full bg-transparent px-3 py-2.5 text-sm text-white outline-none placeholder:text-steel"
+            className="w-full bg-transparent px-3 py-2.5 text-sm text-foreground outline-none placeholder:text-steel"
             placeholder="10-digit mobile"
           />
         </div>
       </label>
 
-      <label className="block text-sm font-medium text-white/80">
+      <label className="block text-sm font-medium text-navy/80">
         Email <span className="text-steel">(optional)</span>
         <input
           type="email"
@@ -155,7 +155,7 @@ export default function LeadQuoteForm() {
         />
       </label>
 
-      <label className="block text-sm font-medium text-white/80">
+      <label className="block text-sm font-medium text-navy/80">
         What do you want to build?
         <select
           value={serviceInterest}
@@ -163,7 +163,7 @@ export default function LeadQuoteForm() {
           className={fieldClass}
         >
           {websiteTypeOptions.map((option) => (
-            <option key={option} value={option} className="bg-ink text-white">
+            <option key={option} value={option} className="bg-white text-foreground">
               {option}
             </option>
           ))}
@@ -172,8 +172,8 @@ export default function LeadQuoteForm() {
 
       <div>
         <div className="flex items-center justify-between text-sm">
-          <span className="font-medium text-white/80">Your budget</span>
-          <span className="font-semibold text-signal">{formatBudget(budget)}</span>
+          <span className="font-medium text-navy/80">Your budget</span>
+          <span className="font-semibold text-accent">{formatBudget(budget)}</span>
         </div>
         <input
           type="range"
@@ -190,7 +190,7 @@ export default function LeadQuoteForm() {
         </div>
       </div>
 
-      <label className="block text-sm font-medium text-white/80">
+      <label className="block text-sm font-medium text-navy/80">
         When do you want to start? <span className="text-steel">(optional)</span>
         <select
           value={timeline}
@@ -198,14 +198,14 @@ export default function LeadQuoteForm() {
           className={fieldClass}
         >
           {timelineOptions.map((option) => (
-            <option key={option} value={option} className="bg-ink text-white">
+            <option key={option} value={option} className="bg-white text-foreground">
               {option}
             </option>
           ))}
         </select>
       </label>
 
-      <label className="block text-sm font-medium text-white/80">
+      <label className="block text-sm font-medium text-navy/80">
         Anything else? <span className="text-steel">(optional)</span>
         <textarea
           rows={3}
@@ -216,7 +216,7 @@ export default function LeadQuoteForm() {
         />
       </label>
 
-      <label className="block text-sm font-medium text-white/80">
+      <label className="block text-sm font-medium text-navy/80">
         Quick check: {captchaA} + {captchaB} = ?
         <input
           required
@@ -227,7 +227,7 @@ export default function LeadQuoteForm() {
         />
       </label>
 
-      <label className="flex items-start gap-2.5 text-sm text-white/75">
+      <label className="flex items-start gap-2.5 text-sm text-navy/75">
         <input
           type="checkbox"
           checked={serious}
@@ -250,7 +250,7 @@ export default function LeadQuoteForm() {
       </p>
 
       {feedback && (
-        <p className={`text-sm ${status === "error" ? "text-red-400" : "text-signal"}`}>
+        <p className={`text-sm ${status === "error" ? "text-red-600" : "text-accent"}`}>
           {feedback}
         </p>
       )}

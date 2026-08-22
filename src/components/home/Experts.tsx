@@ -42,7 +42,7 @@ export default function Experts() {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
             Founders
           </p>
-          <h2 className="mt-4 font-display section-title font-bold text-white">
+          <h2 className="mt-4 font-display section-title font-bold text-navy">
             Built by people who <span className="text-signal">ship</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-steel md:text-lg">
@@ -58,7 +58,7 @@ export default function Experts() {
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/15 font-display text-lg font-bold text-signal transition duration-300 group-hover:scale-105 group-hover:bg-accent/25 group-hover:shadow-[0_0_24px_rgba(56,189,248,0.25)]">
                     {person.initials}
                   </div>
-                  <h3 className="mt-6 font-display text-2xl font-bold tracking-tight text-white">
+                  <h3 className="mt-6 font-display text-2xl font-bold tracking-tight text-navy">
                     {person.name}
                   </h3>
                   <p className="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-signal">
@@ -67,7 +67,7 @@ export default function Experts() {
                   {"phoneDisplay" in person && person.phoneDisplay ? (
                     <a
                       href={`tel:+91${person.phone}`}
-                      className="mt-2 inline-block text-sm font-medium text-white/70 transition hover:text-signal"
+                      className="mt-2 inline-block text-sm font-medium text-steel transition hover:text-signal"
                     >
                       {person.phoneDisplay}
                     </a>
