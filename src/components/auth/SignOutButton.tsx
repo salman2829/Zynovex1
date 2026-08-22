@@ -17,7 +17,7 @@ export default function SignOutButton({ redirectTo = "/" }: Props) {
     <button
       type="button"
       onClick={signOut}
-      className="rounded-full border border-white/20 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white transition hover:border-accent hover:bg-accent/15"
+      className="btn-ghost rounded-full px-4 py-2 text-sm font-semibold"
     >
       Sign out
     </button>

@@ -127,7 +127,7 @@ export default function Process() {
                     {step.body}
                   </p>
                   {index < steps.length - 1 ? (
-                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.22em] text-white/25 lg:hidden">
+                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.22em] text-navy/25 lg:hidden">
                       Next → {steps[index + 1].label}
                     </p>
                   ) : null}

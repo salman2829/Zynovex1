@@ -64,7 +64,7 @@ export default function AdminAuthForm() {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div>
-        <label htmlFor="admin-email" className="mb-1.5 block text-sm font-medium text-white/70">
+        <label htmlFor="admin-email" className="mb-1.5 block text-sm font-medium text-navy/70">
           Admin email
         </label>
         <input
@@ -74,11 +74,11 @@ export default function AdminAuthForm() {
           autoComplete="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 text-white outline-none transition focus:border-accent"
+          className="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-foreground outline-none transition focus:border-accent"
         />
       </div>
       <div>
-        <label htmlFor="admin-password" className="mb-1.5 block text-sm font-medium text-white/70">
+        <label htmlFor="admin-password" className="mb-1.5 block text-sm font-medium text-navy/70">
           Password
         </label>
         <input
@@ -89,12 +89,12 @@ export default function AdminAuthForm() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 text-white outline-none transition focus:border-accent"
+          className="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-foreground outline-none transition focus:border-accent"
         />
       </div>
 
       {error && (
-        <p className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+        <p className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 py-2 text-sm text-red-600">
           {error}
         </p>
       )}
@@ -102,7 +102,7 @@ export default function AdminAuthForm() {
       <button
         type="submit"
         disabled={loading}
-        className="btn-primary w-full rounded-full px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
+        className="btn-primary w-full rounded-full px-5 py-3 text-sm font-semibold disabled:opacity-60"
       >
         {loading ? "Verifying…" : "Enter admin portal"}
       </button>
