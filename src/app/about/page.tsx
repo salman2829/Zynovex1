@@ -3,9 +3,14 @@ import Link from "next/link";
 import { founders } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: {
+    absolute: "About Zynovex Technologies | Digital Solutions & Technology",
+  },
   description:
-    "Zynovex Technologies is a digital agency founded by Mohammad Salman and Korlapally Jashwanth.",
+    "Learn about Zynovex Technologies and our approach to building modern websites, software, AI automations, dashboards, and digital solutions for businesses.",
+  alternates: {
+    canonical: "https://www.zynovextechnologies.in/about",
+  },
 };
 
 export default function AboutPage() {

@@ -3,9 +3,14 @@ import ContactApproach from "@/components/contact/ContactApproach";
 import LeadQuoteForm from "@/components/contact/LeadQuoteForm";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: {
+    absolute: "Contact Zynovex Technologies | Start Your Digital Project",
+  },
   description:
-    "Get a free project quote from Zynovex Technologies. WhatsApp, call, or send a brief — founder-led delivery.",
+    "Contact Zynovex Technologies to discuss your website, software, AI automation, dashboard, booking platform, or digital product project.",
+  alternates: {
+    canonical: "https://www.zynovextechnologies.in/contact",
+  },
 };
 
 export default function ContactPage() {

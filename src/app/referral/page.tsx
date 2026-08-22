@@ -8,9 +8,14 @@ import {
 } from "@/lib/referral";
 
 export const metadata: Metadata = {
-  title: "Referral program",
+  title: {
+    absolute: "Referral Program | Zynovex Technologies",
+  },
   description:
-    "Refer clients to Zynovex Technologies and earn commission when projects close.",
+    "Refer businesses to Zynovex Technologies for websites, AI automation, dashboards, booking platforms, and custom digital solutions.",
+  alternates: {
+    canonical: "https://www.zynovextechnologies.in/referral",
+  },
 };
 
 export default function ReferralPage() {

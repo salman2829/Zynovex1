@@ -4,6 +4,7 @@ import AuthForm from "@/components/auth/AuthForm";
 
 export const metadata: Metadata = {
   title: "Client login",
+  robots: { index: false, follow: false },
 };
 
 export default function LoginPage() {
