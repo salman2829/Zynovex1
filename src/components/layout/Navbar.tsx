@@ -95,17 +95,15 @@ export default function Navbar() {
     setOpen(false);
   }, [pathname]);
 
-  const isDarkTheme = !scrolled && pathname === "/";
-
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
       <nav
         className={`mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 md:h-16 md:px-4 ${
           scrolled
-            ? "border border-navy/8 bg-white/90 shadow-[0_10px_30px_-12px_rgba(7,20,38,0.06)] backdrop-blur-xl"
+            ? "border border-white/12 bg-ink/75 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.65)] backdrop-blur-xl"
             : pathname === "/"
               ? "border border-transparent bg-transparent backdrop-blur-0"
-              : "border border-navy/10 bg-white shadow-[0_4px_20px_rgba(7,20,38,0.04)]"
+              : "border border-white/5 bg-ink/50 backdrop-blur-md"
         }`}
       >
         <Link
@@ -113,26 +111,16 @@ export default function Navbar() {
           aria-label="Zynovex Technologies home"
           className="flex shrink-0 items-center pl-1.5 pr-1"
         >
-          <BrandLockup priority size="sm" tone={isDarkTheme ? "dark" : "light"} />
+          <BrandLockup priority size="sm" />
         </Link>
 
-        <div
-          className={`hidden items-center gap-1 rounded-full border px-2 py-1 md:flex transition-colors duration-300 ${
-            isDarkTheme
-              ? "border-white/10 bg-white/[0.03]"
-              : "border-navy/8 bg-navy/[0.02]"
-          }`}
-        >
+        <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] px-2 py-1 md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               prefetch
-              className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-300 ${
-                isDarkTheme
-                  ? "text-white/70 hover:text-white"
-                  : "text-steel hover:bg-navy/5 hover:text-navy"
-              }`}
+              className="rounded-full px-3.5 py-1.5 text-sm font-medium text-steel transition-colors hover:bg-white/5 hover:text-white"
             >
               {link.label}
             </Link>
@@ -145,11 +133,7 @@ export default function Navbar() {
               <Link
                 href="/auth/login"
                 prefetch
-                className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300 ${
-                  isDarkTheme
-                    ? "border border-white/20 text-white hover:border-signal/50 hover:bg-white/5"
-                    : "btn-ghost"
-                }`}
+                className="btn-ghost inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold"
               >
                 Client login
               </Link>
@@ -170,9 +154,7 @@ export default function Navbar() {
         <button
           type="button"
           aria-label="Toggle menu"
-          className={`mr-1 md:hidden transition-colors duration-300 ${
-            isDarkTheme ? "text-white" : "text-navy"
-          }`}
+          className="mr-1 text-white md:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -180,10 +162,10 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="mx-auto mt-2 max-w-6xl rounded-2xl border border-navy/10 bg-white px-5 py-4 shadow-lg md:hidden">
+        <div className="mx-auto mt-2 max-w-6xl rounded-2xl border border-white/10 bg-ink px-5 py-4 md:hidden">
           <div className="flex flex-col gap-2">
             {links.map((link) => (
-              <Link key={link.href} href={link.href} prefetch className="py-2 text-foreground/80 hover:text-navy">
+              <Link key={link.href} href={link.href} prefetch className="py-2 text-white/80">
                 {link.label}
               </Link>
             ))}

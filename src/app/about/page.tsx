@@ -15,13 +15,13 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="page-grade">
+    <div className="page-grade text-white">
       <section className="atmosphere px-5 pb-20 pt-32 md:px-8 md:pb-28 md:pt-40">
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-signal">
             About Zynovex
           </p>
-          <h1 className="mt-5 font-display section-title font-extrabold text-navy">
+          <h1 className="mt-5 font-display section-title font-extrabold">
             A digital agency
             <br />
             built to <span className="text-signal">ship.</span>
@@ -55,7 +55,7 @@ export default function AboutPage() {
                 key={item.title}
                 className="glass rounded-2xl p-6 md:p-7"
               >
-                <h2 className="font-display text-2xl font-extrabold text-navy">
+                <h2 className="font-display text-2xl font-extrabold text-white">
                   {item.title}
                 </h2>
                 <p className="mt-3 text-steel">{item.body}</p>
@@ -72,7 +72,7 @@ export default function AboutPage() {
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/15 font-display text-lg font-extrabold text-signal">
                   {person.initials}
                 </div>
-                <h3 className="mt-5 font-display text-2xl font-extrabold text-navy">
+                <h3 className="mt-5 font-display text-2xl font-extrabold text-white">
                   {person.name}
                 </h3>
                 <p className="mt-1 text-sm font-bold uppercase tracking-[0.2em] text-signal">

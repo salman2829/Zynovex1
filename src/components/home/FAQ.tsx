@@ -38,7 +38,7 @@ export default function FAQ() {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
             FAQ
           </p>
-          <h2 className="mt-4 font-display section-title font-bold text-navy">
+          <h2 className="mt-4 font-display section-title font-bold text-white">
             Answers up front
           </h2>
         </Reveal>
@@ -57,13 +57,13 @@ export default function FAQ() {
                   onClick={() => setOpen(isOpen ? null : index)}
                   aria-expanded={isOpen}
                 >
-                  <span className="font-display text-base font-bold text-navy md:text-lg">
+                  <span className="font-display text-base font-bold text-white md:text-lg">
                     {item.q}
                   </span>
                   {isOpen ? (
                     <Minus className="shrink-0 text-signal" size={18} />
                   ) : (
-                    <Plus className="shrink-0 text-steel" size={18} />
+                    <Plus className="shrink-0 text-white/40" size={18} />
                   )}
                 </button>
                 <AnimatePresence initial={false}>

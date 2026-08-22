@@ -39,13 +39,13 @@ export default function ContactApproach() {
             className="glass flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-3"
           >
             <div>
-              <p className="text-sm font-semibold text-navy">{person.name}</p>
+              <p className="text-sm font-semibold text-white">{person.name}</p>
               <p className="text-xs text-steel">{person.role}</p>
             </div>
             <div className="flex items-center gap-2">
               <a
                 href={telLink(person.phone)}
-                className="rounded-full border border-navy/15 px-3 py-1.5 text-xs font-semibold text-navy/80 transition hover:border-accent hover:text-accent"
+                className="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/80 transition hover:border-signal hover:text-signal"
               >
                 {person.phoneDisplay}
               </a>
@@ -64,7 +64,7 @@ export default function ContactApproach() {
 
       <div className="space-y-1 text-sm text-steel">
         <p>
-          <span className="font-semibold text-navy/80">Email:</span> {agencyEmail}
+          <span className="font-semibold text-white/80">Email:</span> {agencyEmail}
         </p>
         <p>Free quote · Fast delivery · Clear ownership</p>
       </div>

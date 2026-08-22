@@ -9,7 +9,7 @@ type Mode = "login" | "signup";
 type Step = "email" | "otp";
 
 const fieldClass =
-  "mt-1.5 w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-sm text-foreground outline-none transition placeholder:text-steel focus:border-accent";
+  "mt-1.5 w-full rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-signal";
 
 export default function AuthForm({ mode }: { mode: Mode }) {
   const [step, setStep] = useState<Step>("email");
@@ -218,12 +218,12 @@ export default function AuthForm({ mode }: { mode: Mode }) {
     return (
       <form onSubmit={onVerifyOtp} className="mx-auto w-full max-w-md space-y-4">
         <div>
-          <p className="text-sm text-steel">
-            Code sent to <span className="font-semibold text-navy">{email.trim()}</span>
+          <p className="text-sm text-white/70">
+            Code sent to <span className="font-semibold text-white">{email.trim()}</span>
           </p>
           <button
             type="button"
-            className="mt-1 text-xs font-semibold text-accent hover:text-accent-deep"
+            className="mt-1 text-xs font-semibold text-signal hover:text-white"
             onClick={() => {
               setStep("email");
               setOtp("");
@@ -236,7 +236,7 @@ export default function AuthForm({ mode }: { mode: Mode }) {
         </div>
 
         <div>
-          <label htmlFor="otp" className="mb-0 block text-sm font-medium text-navy/80">
+          <label htmlFor="otp" className="mb-0 block text-sm font-medium text-white/80">
             One-time password (OTP)
           </label>
           <input
@@ -254,12 +254,12 @@ export default function AuthForm({ mode }: { mode: Mode }) {
         </div>
 
         {info && (
-          <p className="rounded-xl border border-accent/25 bg-accent/10 px-3 py-2 text-sm text-accent">
+          <p className="rounded-xl border border-signal/25 bg-signal/10 px-3 py-2 text-sm text-signal">
             {info}
           </p>
         )}
         {error && (
-          <p className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 py-2 text-sm text-red-600">
+          <p className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 py-2 text-sm text-red-200">
             {error}
           </p>
         )}
@@ -276,7 +276,7 @@ export default function AuthForm({ mode }: { mode: Mode }) {
           type="button"
           disabled={loading || resendIn > 0}
           onClick={onResend}
-          className="w-full text-center text-sm font-semibold text-steel transition hover:text-accent disabled:opacity-50"
+          className="w-full text-center text-sm font-semibold text-white/55 transition hover:text-signal disabled:opacity-50"
         >
           {resendIn > 0 ? `Resend OTP in ${resendIn}s` : "Resend OTP"}
         </button>
@@ -294,7 +294,7 @@ export default function AuthForm({ mode }: { mode: Mode }) {
     <form onSubmit={onSendCode} className="mx-auto w-full max-w-md space-y-4">
       {mode === "signup" && (
         <div>
-          <label htmlFor="fullName" className="mb-0 block text-sm font-medium text-navy/80">
+          <label htmlFor="fullName" className="mb-0 block text-sm font-medium text-white/80">
             Full name
           </label>
           <input
@@ -309,7 +309,7 @@ export default function AuthForm({ mode }: { mode: Mode }) {
       )}
 
       <div>
-        <label htmlFor="email" className="mb-0 block text-sm font-medium text-navy/80">
+        <label htmlFor="email" className="mb-0 block text-sm font-medium text-white/80">
           Email
         </label>
         <input
@@ -333,10 +333,10 @@ export default function AuthForm({ mode }: { mode: Mode }) {
           <p
             className={`mt-1.5 text-xs ${
               emailStatus === "taken" || emailStatus === "missing"
-                ? "text-red-600"
+                ? "text-red-300"
                 : emailStatus === "available"
-                  ? "text-accent"
-                  : "text-steel"
+                  ? "text-signal"
+                  : "text-white/45"
             }`}
           >
             {emailHint}
@@ -361,7 +361,7 @@ export default function AuthForm({ mode }: { mode: Mode }) {
       </div>
 
       {error && (
-        <p className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 py-2 text-sm text-red-600">
+        <p className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 py-2 text-sm text-red-200">
           {error}
         </p>
       )}
@@ -374,18 +374,18 @@ export default function AuthForm({ mode }: { mode: Mode }) {
         {loading ? "Sending OTP…" : "Send OTP to email"}
       </button>
 
-      <p className="text-center text-sm text-steel">
+      <p className="text-center text-sm text-white/55">
         {mode === "login" ? (
           <>
             New to Zynovex?{" "}
-            <Link href="/auth/signup" prefetch className="font-semibold text-signal hover:text-accent">
+            <Link href="/auth/signup" prefetch className="font-semibold text-signal hover:text-white">
               Create an account
             </Link>
           </>
         ) : (
           <>
             Already have an account?{" "}
-            <Link href="/auth/login" prefetch className="font-semibold text-signal hover:text-accent">
+            <Link href="/auth/login" prefetch className="font-semibold text-signal hover:text-white">
               Sign in with OTP
             </Link>
           </>
@@ -393,9 +393,9 @@ export default function AuthForm({ mode }: { mode: Mode }) {
       </p>
 
       {mode === "login" && (
-        <p className="text-center text-xs text-steel/70">
+        <p className="text-center text-xs text-white/40">
           Founder?{" "}
-          <Link href="/admin/login" prefetch className="font-semibold text-signal hover:text-accent">
+          <Link href="/admin/login" prefetch className="font-semibold text-signal hover:text-white">
             Admin portal login
           </Link>
         </p>

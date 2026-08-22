@@ -51,7 +51,7 @@ export default function Services() {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-signal">
             Services
           </p>
-          <h2 className="mt-4 font-display section-title font-bold text-navy">
+          <h2 className="mt-4 font-display section-title font-bold text-white">
             What we <span className="text-signal">build</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-steel md:text-lg">
@@ -73,11 +73,11 @@ export default function Services() {
                         <div className="inline-flex w-fit rounded-2xl bg-accent/15 p-3 text-signal transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:bg-accent/25">
                           <Icon size={22} strokeWidth={1.75} aria-hidden />
                         </div>
-                        <span className="font-display text-sm font-bold tracking-[0.18em] text-navy/15 transition group-hover:text-signal/35">
+                        <span className="font-display text-sm font-bold tracking-[0.18em] text-white/15 transition group-hover:text-signal/35">
                           {String(index + 1).padStart(2, "0")}
                         </span>
                       </div>
-                      <h3 className="font-display text-2xl font-bold tracking-tight text-navy md:text-3xl">
+                      <h3 className="font-display text-2xl font-bold tracking-tight text-white md:text-3xl">
                         {item.title}
                       </h3>
                       <p className="mt-2 text-sm font-medium text-signal">
@@ -90,7 +90,7 @@ export default function Services() {
                         {item.points.map((point) => (
                           <li
                             key={point}
-                            className="flex gap-2 text-sm text-foreground/80"
+                            className="flex gap-2 text-sm text-white/70"
                           >
                             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
                             {point}

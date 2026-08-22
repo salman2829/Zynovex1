@@ -8,7 +8,7 @@ import {
 } from "@/lib/referral";
 
 const fieldClass =
-  "mt-1.5 w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-sm text-foreground outline-none transition placeholder:text-steel focus:border-accent";
+  "mt-1.5 w-full rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-signal";
 
 export default function ReferralForm() {
   const [referrerName, setReferrerName] = useState("");
@@ -118,12 +118,12 @@ export default function ReferralForm() {
   return (
     <form onSubmit={onSubmit} className="space-y-8">
       <div>
-        <h3 className="font-display text-lg font-bold text-navy">Your details</h3>
+        <h3 className="font-display text-lg font-bold text-white">Your details</h3>
         <p className="mt-1 text-sm text-steel">
           We’ll use this to pay you when the project closes.
         </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <label className="block text-sm font-medium text-navy/80 sm:col-span-2">
+          <label className="block text-sm font-medium text-white/80 sm:col-span-2">
             Full name
             <input
               required
@@ -133,7 +133,7 @@ export default function ReferralForm() {
               placeholder="Your name"
             />
           </label>
-          <label className="block text-sm font-medium text-navy/80">
+          <label className="block text-sm font-medium text-white/80">
             Email
             <input
               type="email"
@@ -144,7 +144,7 @@ export default function ReferralForm() {
               placeholder="you@gmail.com"
             />
           </label>
-          <label className="block text-sm font-medium text-navy/80">
+          <label className="block text-sm font-medium text-white/80">
             Phone / WhatsApp
             <input
               required
@@ -156,7 +156,7 @@ export default function ReferralForm() {
               placeholder="10-digit mobile"
             />
           </label>
-          <label className="block text-sm font-medium text-navy/80 sm:col-span-2">
+          <label className="block text-sm font-medium text-white/80 sm:col-span-2">
             UPI ID <span className="text-steel">(optional, for payout)</span>
             <input
               value={referrerUpi}
@@ -169,14 +169,14 @@ export default function ReferralForm() {
       </div>
 
       <div>
-        <h3 className="font-display text-lg font-bold text-navy">
+        <h3 className="font-display text-lg font-bold text-white">
           Client you’re referring
         </h3>
         <p className="mt-1 text-sm text-steel">
           Share enough detail for us to qualify the opportunity.
         </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <label className="block text-sm font-medium text-navy/80">
+          <label className="block text-sm font-medium text-white/80">
             Client name
             <input
               required
@@ -186,7 +186,7 @@ export default function ReferralForm() {
               placeholder="Decision maker / owner"
             />
           </label>
-          <label className="block text-sm font-medium text-navy/80">
+          <label className="block text-sm font-medium text-white/80">
             Company <span className="text-steel">(optional)</span>
             <input
               value={clientCompany}
@@ -195,7 +195,7 @@ export default function ReferralForm() {
               placeholder="Business name"
             />
           </label>
-          <label className="block text-sm font-medium text-navy/80">
+          <label className="block text-sm font-medium text-white/80">
             Client phone
             <input
               required
@@ -207,7 +207,7 @@ export default function ReferralForm() {
               placeholder="Client mobile"
             />
           </label>
-          <label className="block text-sm font-medium text-navy/80">
+          <label className="block text-sm font-medium text-white/80">
             Client email <span className="text-steel">(optional)</span>
             <input
               type="email"
@@ -217,7 +217,7 @@ export default function ReferralForm() {
               placeholder="client@company.com"
             />
           </label>
-          <label className="block text-sm font-medium text-navy/80">
+          <label className="block text-sm font-medium text-white/80">
             Service needed
             <select
               value={serviceInterest}
@@ -225,13 +225,13 @@ export default function ReferralForm() {
               className={fieldClass}
             >
               {websiteTypeOptions.map((option) => (
-                <option key={option} value={option} className="bg-white text-foreground">
+                <option key={option} value={option} className="bg-ink">
                   {option}
                 </option>
               ))}
             </select>
           </label>
-          <label className="block text-sm font-medium text-navy/80">
+          <label className="block text-sm font-medium text-white/80">
             Estimated budget
             <select
               value={estimatedBudget}
@@ -239,16 +239,16 @@ export default function ReferralForm() {
               className={fieldClass}
             >
               {referralBudgetOptions.map((option) => (
-                <option key={option} value={option} className="bg-white text-foreground">
+                <option key={option} value={option} className="bg-ink">
                   {option}
                 </option>
               ))}
             </select>
-            <span className="mt-1.5 block text-xs text-accent">
+            <span className="mt-1.5 block text-xs text-signal">
               Estimated reward: {estimatedReward}
             </span>
           </label>
-          <label className="block text-sm font-medium text-navy/80 sm:col-span-2">
+          <label className="block text-sm font-medium text-white/80 sm:col-span-2">
             Context / notes <span className="text-steel">(optional)</span>
             <textarea
               rows={3}
@@ -261,7 +261,7 @@ export default function ReferralForm() {
         </div>
       </div>
 
-      <label className="flex items-start gap-3 text-sm text-navy/70">
+      <label className="flex items-start gap-3 text-sm text-white/70">
         <input
           type="checkbox"
           checked={agreed}
@@ -278,8 +278,8 @@ export default function ReferralForm() {
         <p
           className={`rounded-xl border px-3 py-2 text-sm ${
             status === "done"
-              ? "border-accent/30 bg-accent/10 text-accent"
-              : "border-red-400/30 bg-red-500/10 text-red-600"
+              ? "border-signal/30 bg-signal/10 text-signal"
+              : "border-red-400/30 bg-red-500/10 text-red-200"
           }`}
         >
           {feedback}

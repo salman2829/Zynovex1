@@ -36,14 +36,14 @@ export default async function AdminLoginPage() {
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal">
           Restricted
         </p>
-        <h1 className="mt-3 font-display text-3xl font-bold text-navy md:text-4xl">
+        <h1 className="mt-3 font-display text-3xl font-bold text-white md:text-4xl">
           Admin portal
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-steel">
           For Zynovex founders only. Client accounts cannot enter this portal.
         </p>
 
-        <div className="mt-8 rounded-2xl border border-navy/10 bg-white p-6 shadow-lg md:p-8">
+        <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.05] p-6 md:p-8">
           {!hasSupabaseEnv() ? (
             <p className="text-sm text-steel">
               Add Supabase keys in <code className="text-signal">.env.local</code>{" "}
@@ -56,7 +56,7 @@ export default async function AdminLoginPage() {
 
         <p className="mt-6 text-center text-sm text-steel">
           Looking for the client area?{" "}
-          <Link href="/auth/login" className="font-semibold text-signal hover:text-accent">
+          <Link href="/auth/login" className="font-semibold text-signal hover:text-white">
             Client login
           </Link>
         </p>

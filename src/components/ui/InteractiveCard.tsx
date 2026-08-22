@@ -68,8 +68,8 @@ export default function InteractiveCard({
 
   const toneClass =
     tone === "ink"
-      ? "border-line bg-ink-soft text-foreground"
-      : "border-line bg-paper text-foreground";
+      ? "border-white/10 bg-ink-mid text-white"
+      : "border-white/10 bg-white/[0.05] text-white";
 
   return (
     <div
@@ -77,7 +77,7 @@ export default function InteractiveCard({
       onPointerMove={onPointerMove}
       onPointerLeave={reset}
       onPointerCancel={reset}
-      className={`hover-flash group relative h-full overflow-hidden rounded-[1.5rem] border transition-[border-color,box-shadow] duration-200 hover:border-accent/40 hover:shadow-[0_18px_40px_-24px_rgba(18,100,232,0.18)] ${toneClass} ${className}`}
+      className={`hover-flash group relative h-full overflow-hidden rounded-[1.5rem] border transition-[border-color,box-shadow] duration-200 hover:border-signal/40 hover:shadow-[0_18px_40px_-24px_rgba(56,189,248,0.45)] ${toneClass} ${className}`}
       style={{
         transform,
         transformStyle: "preserve-3d",

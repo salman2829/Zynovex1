@@ -13,27 +13,23 @@ const sizeMap: Record<Size, { className: string; width: number; height: number }
 export function BrandLockup({
   priority = false,
   size = "md",
-  tone = "light",
 }: {
   priority?: boolean;
   tone?: "light" | "dark";
   size?: Size;
 }) {
   const { className, width, height } = sizeMap[size];
-  const src = tone === "dark" ? "/logo-nav.png" : "/logo-transparent.png";
 
   return (
     <Image
-      src={src}
+      src="/logo-nav.png"
       alt="Zynovex Technologies"
       width={width}
       height={height}
       priority={priority}
       quality={75}
       sizes={`${Math.round(width * 2)}px`}
-      className={`${className} object-contain transition-all duration-300 ${
-        tone === "dark" ? "brightness-0 invert" : ""
-      }`}
+      className={`${className} object-contain`}
     />
   );
 }
@@ -52,7 +48,7 @@ export default function BrandLogo({
       ? "/logo-mark.png"
       : variant === "full"
         ? "/logo-badge.png"
-        : "/logo-transparent.png";
+        : "/logo-nav.png";
 
   return (
     <Image
