@@ -83,7 +83,7 @@ export default function Hero() {
           <span className="block">engineered to grow.</span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-xl text-center text-base leading-relaxed text-steel md:text-lg">
+        <p className="mx-auto mt-6 max-w-xl text-center text-base leading-relaxed text-white/70 md:text-lg">
           Websites, AI automations, dashboards, booking platforms, and design —
           founder-led delivery with clear scope and measurable outcomes.
         </p>
@@ -103,7 +103,7 @@ export default function Hero() {
               href="https://wa.me/917416922398?text=Hi%20Zynovex%20%E2%80%94%20I%E2%80%99d%20like%20a%20free%20project%20quote."
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-ghost inline-flex items-center rounded-full px-6 py-3.5 text-sm font-semibold"
+              className="inline-flex items-center rounded-full border border-white/20 bg-white/[0.04] px-6 py-3.5 text-sm font-semibold text-white transition hover:border-signal hover:bg-accent/15"
             >
               WhatsApp us
             </a>
@@ -116,7 +116,7 @@ export default function Hero() {
               key={item.label}
               className="hover-flash glass rounded-2xl px-3 py-4 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-signal/40 md:px-4"
             >
-              <p className="font-display text-sm font-bold text-white md:text-base">
+              <p className="font-display text-sm font-bold text-navy md:text-base">
                 {item.label}
               </p>
               <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-signal">

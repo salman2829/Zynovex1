@@ -31,7 +31,9 @@ export function BrandLockup({
       priority={priority}
       quality={75}
       sizes={`${Math.round(width * 2)}px`}
-      className={`${className} object-contain`}
+      className={`${className} object-contain transition-all duration-300 ${
+        tone === "dark" ? "brightness-0 invert" : ""
+      }`}
     />
   );
 }
