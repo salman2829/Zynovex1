@@ -95,6 +95,8 @@ export default function Navbar() {
     setOpen(false);
   }, [pathname]);
 
+  const isDarkTheme = !scrolled && pathname === "/";
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
       <nav
@@ -111,16 +113,26 @@ export default function Navbar() {
           aria-label="Zynovex Technologies home"
           className="flex shrink-0 items-center pl-1.5 pr-1"
         >
-          <BrandLockup priority size="sm" />
+          <BrandLockup priority size="sm" tone={isDarkTheme ? "dark" : "light"} />
         </Link>
 
-        <div className="hidden items-center gap-1 rounded-full border border-navy/8 bg-navy/[0.02] px-2 py-1 md:flex">
+        <div
+          className={`hidden items-center gap-1 rounded-full border px-2 py-1 md:flex transition-colors duration-300 ${
+            isDarkTheme
+              ? "border-white/10 bg-white/[0.03]"
+              : "border-navy/8 bg-navy/[0.02]"
+          }`}
+        >
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               prefetch
-              className="rounded-full px-3.5 py-1.5 text-sm font-medium text-steel transition-colors hover:bg-navy/5 hover:text-navy"
+              className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-300 ${
+                isDarkTheme
+                  ? "text-white/70 hover:text-white"
+                  : "text-steel hover:bg-navy/5 hover:text-navy"
+              }`}
             >
               {link.label}
             </Link>
@@ -133,7 +145,11 @@ export default function Navbar() {
               <Link
                 href="/auth/login"
                 prefetch
-                className="btn-ghost inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold"
+                className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300 ${
+                  isDarkTheme
+                    ? "border border-white/20 text-white hover:border-signal/50 hover:bg-white/5"
+                    : "btn-ghost"
+                }`}
               >
                 Client login
               </Link>
@@ -154,7 +170,9 @@ export default function Navbar() {
         <button
           type="button"
           aria-label="Toggle menu"
-          className="mr-1 text-navy md:hidden"
+          className={`mr-1 md:hidden transition-colors duration-300 ${
+            isDarkTheme ? "text-white" : "text-navy"
+          }`}
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X size={22} /> : <Menu size={22} />}

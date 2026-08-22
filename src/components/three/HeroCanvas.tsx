@@ -4,8 +4,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useMemo, useRef } from "react";
 import * as THREE from "three";
 
-const CYAN = "#1264E8"; // Primary Blue
-const BLUE = "#071426"; // Navy
+const CYAN = "#38bdf8";
+const BLUE = "#2563eb";
 
 function WireGlobe() {
   const group = useRef<THREE.Group>(null);
@@ -74,7 +74,7 @@ function SceneContent() {
   return (
     <>
       <ambientLight intensity={0.55} />
-      <group position={[0, 0, 0]} scale={0.78}>
+      <group position={[0, 0, 0]} scale={0.86}>
         <WireGlobe />
         <OrbitNodes />
       </group>
