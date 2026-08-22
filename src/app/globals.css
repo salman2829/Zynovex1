@@ -2,10 +2,10 @@
 
 :root {
   /* White + Navy + Blue — Corporate Professional */
-  --ink: #FFFFFF;
-  --ink-soft: #F5F8FC;
+  --ink: #F5F8FC;
+  --ink-soft: #FFFFFF;
   --ink-mid: #E8F3FF;
-  --mist: #F5F8FC;
+  --mist: #FFFFFF;
   --paper: #FFFFFF;
   --steel: #64748B;
   --line: rgba(7, 20, 38, 0.08);

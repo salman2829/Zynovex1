@@ -100,10 +100,10 @@ export default function Navbar() {
       <nav
         className={`mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 md:h-16 md:px-4 ${
           scrolled
-            ? "border border-navy/8 bg-ink/80 shadow-[0_10px_30px_-12px_rgba(7,20,38,0.12)] backdrop-blur-xl"
+            ? "border border-navy/8 bg-white/90 shadow-[0_10px_30px_-12px_rgba(7,20,38,0.06)] backdrop-blur-xl"
             : pathname === "/"
               ? "border border-transparent bg-transparent backdrop-blur-0"
-              : "border border-navy/5 bg-ink/60 backdrop-blur-md"
+              : "border border-navy/10 bg-white shadow-[0_4px_20px_rgba(7,20,38,0.04)]"
         }`}
       >
         <Link

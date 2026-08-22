@@ -13,7 +13,7 @@ export default function Footer() {
     <footer className="relative z-10 border-t border-line bg-navy text-white">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-14 md:grid-cols-[1.3fr_1fr_1fr_1fr] md:px-8 md:py-16">
         <div>
-          <BrandLockup size="sm" />
+          <BrandLockup size="sm" tone="dark" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/45">
             Digital products engineered to move the needle — websites, AI,
             dashboards, and more.
